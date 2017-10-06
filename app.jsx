@@ -1,3 +1,4 @@
+//Timer + Stop + Start + Reset
 class Timer extends React.Component {
   constructor(props) {
     super(props);
@@ -9,15 +10,12 @@ class Timer extends React.Component {
     const start = (e) => {
       this.Start();
     }
-
     const reset = (e) => {
       this.Reset();
     }
-
     const stop = (e) => {
       this.Stop();
     }
-
     return (
       <div className="stopwatch">
         <h2> STOPWATCH</h2>
@@ -36,7 +34,6 @@ class Timer extends React.Component {
       });
     }, 1000);
   }
-
   Stop() {
     clearInterval(this.timer);
   }
@@ -48,6 +45,36 @@ class Timer extends React.Component {
     this.Stop();
   }
 }
+
+//Contador + -
+class Contador extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      contador:0
+    }
+  }
+  
+  aumentar() {
+    this.setState({contador:this.state.contador+1})
+  }
+  decrementar() { 
+    let contador = this.state.contador
+    if(contador>0) {
+      this.setState({contador:contador-1})
+    }
+  }
+  render() {
+    return (
+      <div className="player-score counter">
+      <button className="player decrement counter-action" onClick={this.decrementar.bind(this)}> - </button>
+      <div className="counter-score">{this.state.contador}</div>
+      <button className="player increment counter-action" onClick={this.aumentar.bind(this)}> + </button>
+    </div>
+    )
+  } 
+}
+
 
 class Model {
   constructor() {
@@ -127,11 +154,7 @@ const App = ({ title, model }) => {
         >
           {todo.text}
         </div>
-        <div className="player-score counter">
-          <button className="player decrement counter-action"> - </button>
-          <div className="counter-score">{todo.score}</div>
-          <button className="player increment counter-action"> + </button>
-        </div>
+<Contador/>
       </div>
     );
   });
