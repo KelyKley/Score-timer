@@ -1,3 +1,53 @@
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: 0
+    }
+  }
+  render() {
+    const start = (e) => {
+        this.Start();
+    }
+    
+    const reset = (e) => {
+      this.Reset();
+    }
+
+    const stop = (e) => {
+      this.Stop();
+    }
+
+    return (
+      <div className="stopwatch-time">
+        <h2> STOPWATH</h2>
+        <h1 className="stopwatch-time"> {this.state.time}</h1>
+        <button onClick={start}>Start</button>
+        <button onClick={stop}>Stop</button>
+        <button onClick={reset}>Reset</button>
+      </div>
+    );
+  }
+
+  Start() {
+    this.timer = setInterval(() => {
+      this.setState({
+        time: this.state.time + 1
+      });
+    }, 1000);
+  }
+
+  Stop() {
+    clearInterval(this.timer);
+  }
+  Reset() {
+    clearInterval(this.timer);
+    this.setState({
+      time: 0
+    });
+    this.Stop();
+  }
+}
 
 class Model {
   constructor() {
@@ -101,7 +151,10 @@ const App = ({ title, model }) => {
             </tr>
           </tbody>
         </table>
-        <div id="root" className="stopwatch"></div>
+
+        <div id="root" className="stopwatch">
+          <Timer />
+        </div>
       </div>
       <div> {items} </div>
 
@@ -132,7 +185,7 @@ let render = () => {
   ReactDOM.render(
     <App title="Scoreboard" model={model} />,
     document.getElementById("container")
-  );  
+  );
 };
 
 model.subscribe(render);
