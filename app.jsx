@@ -7,9 +7,9 @@ class Timer extends React.Component {
   }
   render() {
     const start = (e) => {
-        this.Start();
+      this.Start();
     }
-    
+
     const reset = (e) => {
       this.Reset();
     }
@@ -19,9 +19,9 @@ class Timer extends React.Component {
     }
 
     return (
-      <div className="stopwatch-time">
-        <h2> STOPWATH</h2>
-        <h1 className="stopwatch-time"> {this.state.time}</h1>
+      <div className="stopwatch">
+        <h2> STOPWATCH</h2>
+        <h1 className="stopwatch-time">{this.state.time}</h1>
         <button onClick={start}>Start</button>
         <button onClick={stop}>Stop</button>
         <button onClick={reset}>Reset</button>
@@ -151,10 +151,7 @@ const App = ({ title, model }) => {
             </tr>
           </tbody>
         </table>
-
-        <div id="root" className="stopwatch">
-          <Timer />
-        </div>
+        <Timer />
       </div>
       <div> {items} </div>
 
